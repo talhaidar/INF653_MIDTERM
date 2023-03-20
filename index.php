@@ -7,6 +7,6 @@
     <title>t Midterm</title>
 </head>
 <body>
-    <h1>t Midterm INF653</h1>
+    <h1>TaherAlhaidar Midterm INF653</h1>
 </body>
 </html>
