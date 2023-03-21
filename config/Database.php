@@ -2,12 +2,13 @@
 
     class Database {
         // DB Params
+        private $conn;
         private $host;
         private $port;
         private $dbname;
         private $username;
         private $password;
-        private $conn;
+        
 
         public function __construct(){
             $this->username = getenv('USERNAME');
@@ -30,7 +31,7 @@
                 
                 try {
                     $this->conn = new PDO($dsn, $this->username, $this->password);
-                    $this->conn -> setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                    $this->conn-> setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                     return $this->conn;
                 } catch(PDOException $e) {
                     // echo for tutorial but log the error for production

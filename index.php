@@ -8,5 +8,8 @@
 </head>
 <body>
     <h1>TaherAlhaidar Midterm INF653</h1>
+  <?php
+echo  $_ENV["HOST"];
+?>
 </body>
 </html>
