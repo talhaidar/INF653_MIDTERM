@@ -21,9 +21,9 @@
             FROM
                 ' . $this -> table . ' 
             LEFT JOIN
-                authors ON authors.id = "quotes.author_id"
+                authors ON authors.id = quotes.author_id
             LEFT JOIN 
-                categories ON categories.id = "quotes.category_id"
+                categories ON categories.id = quotes.category_id
             ORDER BY
                 quotes.id DESC';
 
@@ -44,9 +44,9 @@
             FROM
                 ' . $this -> table . '
             LEFT JOIN
-                authors ON authors.id = "quotes.author_id"
+                authors ON authors.id = quotes.author_id
             LEFT JOIN 
-                 categories ON categories.id = "quotes.category_id"
+                 categories ON categories.id = quotes.category_id
             WHERE
                 quotes.id = ?
             LIMIT 1 OFFSET 0';
@@ -78,11 +78,11 @@
              FROM
                 ' . $this -> table . '
             LEFT JOIN
-                authors ON authors.id = "quotes.author_id"
+                authors ON authors.id = quotes.author_id
             LEFT JOIN 
-                categories ON categories.id = "quotes.category_id"
+                categories ON categories.id = quotes.category_id
             WHERE 
-                "quotes.author_id" = :author_id';
+                quotes.author_id = :author_id';
 
         // prepare
         $stmt = $this -> conn -> prepare($query);    
@@ -104,11 +104,11 @@
              FROM
                 ' . $this -> table . ' 
             LEFT JOIN
-                authors ON authors.id = "quotes.author_id"
+                authors ON authors.id = quotes.author_id
             LEFT JOIN 
-                categories ON categories.id = "quotes.category_id"
+                categories ON categories.id = quotes.category_id
             WHERE 
-                "quotes.category_id" = :category_id';
+                quotes.category_id = :category_id';
 
         // prepare
         $stmt = $this -> conn -> prepare($query);    
@@ -130,11 +130,11 @@
              FROM
                 ' . $this -> table . ' 
             LEFT JOIN
-                authors ON authors.id = "quotes.author_id"
+                authors ON authors.id = quotes.author_id
             LEFT JOIN 
-                categories ON categories.id = "quotes.category_id"
+                categories ON categories.id = quotes.category_id
             WHERE 
-                "quotes.author_id" = :author_id && "quotes.category_id" = :category_id';
+                quotes.author_id = :author_id && quotes.category_id = :category_id';
 
         // prepare
         $stmt = $this -> conn -> prepare($query);    
