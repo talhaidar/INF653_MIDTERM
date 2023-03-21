@@ -19,11 +19,11 @@
         $query = 'SELECT
                 quotes.id, quotes.quote, authors.author, categories.category
             FROM
-                ' . $this -> table . ' quotes
+                ' . $this -> table . ' 
             LEFT JOIN
-                authors ON authors.id = quotes.authorId
+                authors ON (authors.id = quotes.authorId)
             LEFT JOIN 
-                categories ON categories.id = quotes.categoryId
+                categories ON (categories.id = quotes.categoryId)
             ORDER BY
                 quotes.id DESC';
 
@@ -42,11 +42,11 @@
         $query = 'SELECT 
                 quotes.id, quotes.quote, authors.author, categories.category
             FROM
-                ' . $this -> table . ' quotes
+                ' . $this -> table . '
             LEFT JOIN
-                authors ON authors.id = quotes.authorId
+                authors ON (authors.id = quotes.authorId)
             LEFT JOIN 
-                 categories ON categories.id = quotes.categoryId
+                 categories ON (categories.id = quotes.categoryId)
             WHERE
                 quotes.id = ?
             LIMIT 0,1';
@@ -76,11 +76,11 @@
         $query = 'SELECT 
                 quotes.id, quotes.quote, authors.author, categories.category
              FROM
-                ' . $this -> table . ' quotes
+                ' . $this -> table . '
             LEFT JOIN
-                authors ON authors.id = quotes.authorId
+                authors ON (authors.id = quotes.authorId)
             LEFT JOIN 
-                categories ON categories.id = quotes.categoryId
+                categories ON (categories.id = quotes.categoryId)
             WHERE 
                 quotes.authorId = :authorId';
 
@@ -102,11 +102,11 @@
         $query = 'SELECT 
                 quotes.id, quotes.quote, authors.author, categories.category
              FROM
-                ' . $this -> table . ' quotes
+                ' . $this -> table . ' 
             LEFT JOIN
-                authors ON authors.id = quotes.authorId
+                authors ON (authors.id = quotes.authorId)
             LEFT JOIN 
-                categories ON categories.id = quotes.categoryId
+                categories ON (categories.id = quotes.categoryId)
             WHERE 
                 quotes.categoryId = :categoryId';
 
@@ -128,11 +128,11 @@
         $query = 'SELECT 
                 quotes.id, quotes.quote, authors.author, categories.category
              FROM
-                ' . $this -> table . ' quotes
+                ' . $this -> table . ' 
             LEFT JOIN
-                authors ON authors.id = quotes.authorId
+                authors ON (authors.id = quotes.authorId)
             LEFT JOIN 
-                categories ON categories.id = quotes.categoryId
+                categories ON (categories.id = quotes.categoryId)
             WHERE 
                 quotes.authorId = :authorId && quotes.categoryId = :categoryId';
 
