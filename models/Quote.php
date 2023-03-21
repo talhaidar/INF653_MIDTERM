@@ -27,7 +27,7 @@
             LEFT JOIN 
                 categories ON categories.id = quotes.category_id
             ORDER BY
-                quotes.id DESC';
+                quotes.id ASC';
 
         // Prepare Statement
         $stmt = $this -> conn -> prepare($query);

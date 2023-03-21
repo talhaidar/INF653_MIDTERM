@@ -21,7 +21,7 @@
                 FROM
                     ' . $this -> table . '
                 ORDER BY
-                    id DESC';
+                    id ASC';
 
         // Prepare Statement
         $stmt = $this -> conn -> prepare($query);
