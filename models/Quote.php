@@ -82,7 +82,7 @@
             LEFT JOIN 
                 categories ON categories.id = "quotes.categoryId"
             WHERE 
-                quotes.authorId = :authorId';
+                "quotes.authorId" = :authorId';
 
         // prepare
         $stmt = $this -> conn -> prepare($query);    
