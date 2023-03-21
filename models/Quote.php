@@ -17,13 +17,13 @@
     public function read() {
         // Create Query
         $query = 'SELECT
-                quotes.id, quotes.quote, authors.author, categories.category
+                quotes.id, quotes.quote, authors.author , categories.category 
             FROM
                 ' . $this -> table . ' 
             LEFT JOIN
-                authors ON authors.id = "quotes.authorId"
+                authors ON authors.id = "quotes.author_id"
             LEFT JOIN 
-                categories ON categories.id = "quotes.categoryId"
+                categories ON categories.id = "quotes.category_id"
             ORDER BY
                 quotes.id DESC';
 
@@ -44,12 +44,12 @@
             FROM
                 ' . $this -> table . '
             LEFT JOIN
-                authors ON authors.id = "quotes.authorId"
+                authors ON authors.id = "quotes.author_id"
             LEFT JOIN 
-                 categories ON categories.id = "quotes.categoryId"
+                 categories ON categories.id = "quotes.category_id"
             WHERE
                 quotes.id = ?
-            LIMIT 0,1';
+            LIMIT 1 OFFSET 0';
     
         // Prepare Statement
         $stmt = $this -> conn -> prepare($query);
@@ -71,24 +71,24 @@
     }
 
     // Start Get all quotes by an author ID
-    public function read_authorId() {
+    public function read_author_id() {
     
         $query = 'SELECT 
                 quotes.id, quotes.quote, authors.author, categories.category
              FROM
                 ' . $this -> table . '
             LEFT JOIN
-                authors ON authors.id = "quotes.authorId"
+                authors ON authors.id = "quotes.author_id"
             LEFT JOIN 
-                categories ON categories.id = "quotes.categoryId"
+                categories ON categories.id = "quotes.category_id"
             WHERE 
-                "quotes.authorId" = :authorId';
+                "quotes.author_id" = :author_id';
 
         // prepare
         $stmt = $this -> conn -> prepare($query);    
   
-        // Bind AuthorId
-        $stmt -> bindParam(':authorId', $this -> authorId);
+        // Bind author_id
+        $stmt -> bindParam(':author_id', $this -> author_id);
    
         // Execute
         $stmt->execute();    
@@ -97,24 +97,24 @@
 
     }
 
-    public function read_categoryId() {
+    public function read_category_id() {
     
         $query = 'SELECT 
                 quotes.id, quotes.quote, authors.author, categories.category
              FROM
                 ' . $this -> table . ' 
             LEFT JOIN
-                authors ON authors.id = "quotes.authorId"
+                authors ON authors.id = "quotes.author_id"
             LEFT JOIN 
-                categories ON categories.id = "quotes.categoryId"
+                categories ON categories.id = "quotes.category_id"
             WHERE 
-                "quotes.categoryId" = :categoryId';
+                "quotes.category_id" = :category_id';
 
         // prepare
         $stmt = $this -> conn -> prepare($query);    
   
-        // Bind categoryId
-        $stmt -> bindParam(':categoryId', $this -> categoryId);
+        // Bind category_id
+        $stmt -> bindParam(':category_id', $this -> category_id);
    
         // Execute
         $stmt->execute();    
@@ -123,25 +123,25 @@
 
     }
 
-    public function read_authorId_categoryId() {
+    public function read_author_id_category_id() {
     
         $query = 'SELECT 
                 quotes.id, quotes.quote, authors.author, categories.category
              FROM
                 ' . $this -> table . ' 
             LEFT JOIN
-                authors ON authors.id = "quotes.authorId"
+                authors ON authors.id = "quotes.author_id"
             LEFT JOIN 
-                categories ON categories.id = "quotes.categoryId"
+                categories ON categories.id = "quotes.category_id"
             WHERE 
-                "quotes.authorId" = :authorId && "quotes.categoryId" = :categoryId';
+                "quotes.author_id" = :author_id && "quotes.category_id" = :category_id';
 
         // prepare
         $stmt = $this -> conn -> prepare($query);    
   
-        // Bind AuthorId
-        $stmt -> bindParam(':authorId', $this -> authorId);
-        $stmt -> bindParam(':categoryId', $this -> categoryId);
+        // Bind author_id
+        $stmt -> bindParam(':author_id', $this -> author_id);
+        $stmt -> bindParam(':category_id', $this -> category_id);
    
         // Execute
         $stmt->execute();    
@@ -156,21 +156,21 @@
         $query = 'INSERT INTO ' . $this -> table . '
             SET
                 quote = :quote,
-                authorId = :authorId,
-                categoryId = :categoryId';
+                author_id = :author_id,
+                category_id = :category_id';
         
         // Prepare Statement
         $stmt = $this -> conn -> prepare($query);
         
         // Clean Data
         $this -> quote = htmlspecialchars(strip_tags($this -> quote));
-        $this -> authorId = htmlspecialchars(strip_tags($this -> authorId));
-        $this -> categoryId = htmlspecialchars(strip_tags($this -> categoryId));
+        $this -> author_id = htmlspecialchars(strip_tags($this -> author_id));
+        $this -> category_id = htmlspecialchars(strip_tags($this -> category_id));
         
         // Bind Data
         $stmt -> bindParam(':quote', $this -> quote);
-        $stmt -> bindParam(':authorId', $this -> authorId);
-        $stmt -> bindParam(':categoryId', $this -> categoryId);
+        $stmt -> bindParam(':author_id', $this -> author_id);
+        $stmt -> bindParam(':category_id', $this -> category_id);
         
         // Execute Query
         if($stmt -> execute()) {
@@ -190,8 +190,8 @@
             SET
                 id = :id,
                 quote = :quote,
-                authorId = :authorId,
-                categoryId = :categoryId
+                author_id = :author_id,
+                category_id = :category_id
             WHERE
                 id = :id';
     
@@ -201,14 +201,14 @@
         // Clean Data
         $this -> id = htmlspecialchars(strip_tags($this -> id));
         $this -> quote = htmlspecialchars(strip_tags($this -> quote));
-        $this -> authorId = htmlspecialchars(strip_tags($this -> authorId));
-        $this -> categoryId = htmlspecialchars(strip_tags($this -> categoryId));
+        $this -> author_id = htmlspecialchars(strip_tags($this -> author_id));
+        $this -> category_id = htmlspecialchars(strip_tags($this -> category_id));
     
         // Bind Data
         $stmt -> bindParam(':id', $this -> id);
         $stmt -> bindParam(':quote', $this -> quote);
-        $stmt -> bindParam(':authorId', $this -> authorId);
-        $stmt -> bindParam(':categoryId', $this -> categoryId);
+        $stmt -> bindParam(':author_id', $this -> author_id);
+        $stmt -> bindParam(':category_id', $this -> category_id);
     
         // Execute Query
         if($stmt -> execute()) {
