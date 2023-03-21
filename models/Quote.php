@@ -21,9 +21,9 @@
             FROM
                 ' . $this -> table . ' 
             LEFT JOIN
-                authors ON (authors.id = \'quotes.authorId\')
+                authors ON authors.id = "quotes.authorId"
             LEFT JOIN 
-                categories ON (categories.id = \'quotes.categoryId\')
+                categories ON categories.id = "quotes.categoryId"
             ORDER BY
                 quotes.id DESC';
 
@@ -44,9 +44,9 @@
             FROM
                 ' . $this -> table . '
             LEFT JOIN
-                authors ON (authors.id = \'quotes.authorId\')
+                authors ON authors.id = "quotes.authorId"
             LEFT JOIN 
-                 categories ON (categories.id = \'quotes.categoryId\')
+                 categories ON categories.id = "quotes.categoryId"
             WHERE
                 quotes.id = ?
             LIMIT 0,1';
@@ -78,9 +78,9 @@
              FROM
                 ' . $this -> table . '
             LEFT JOIN
-                authors ON (authors.id = \'quotes.authorId\')
+                authors ON authors.id = "quotes.authorId"
             LEFT JOIN 
-                categories ON (categories.id = \'quotes.categoryId\')
+                categories ON categories.id = "quotes.categoryId"
             WHERE 
                 quotes.authorId = :authorId';
 
@@ -104,11 +104,11 @@
              FROM
                 ' . $this -> table . ' 
             LEFT JOIN
-                authors ON (authors.id = \'quotes.authorId\')
+                authors ON authors.id = "quotes.authorId"
             LEFT JOIN 
-                categories ON (categories.id = \'quotes.categoryId\')
+                categories ON categories.id = "quotes.categoryId"
             WHERE 
-                \'quotes.categoryId\' = :categoryId';
+                "quotes.categoryId" = :categoryId';
 
         // prepare
         $stmt = $this -> conn -> prepare($query);    
@@ -130,11 +130,11 @@
              FROM
                 ' . $this -> table . ' 
             LEFT JOIN
-                authors ON (authors.id = \'quotes.authorId\')
+                authors ON authors.id = "quotes.authorId"
             LEFT JOIN 
-                categories ON (categories.id = \'quotes.categoryId\')
+                categories ON categories.id = "quotes.categoryId"
             WHERE 
-                \'quotes.authorId\' = :authorId && \'quotes.categoryId\' = :categoryId';
+                "quotes.authorId" = :authorId && "quotes.categoryId" = :categoryId';
 
         // prepare
         $stmt = $this -> conn -> prepare($query);    
