@@ -7,6 +7,8 @@
      // quote Properties
      public $id;
      public $quote;
+     public $author;
+     public $category;
 
      // Constructor with DB
      public function __construct($db) {
