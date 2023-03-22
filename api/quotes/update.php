@@ -15,8 +15,8 @@
     // Set ID to UPDATE
     $quote -> id = $data -> id;
     $quote -> quote = $data -> quote;
-    $quote -> authorId = $data -> authorId;
-    $quote -> categoryId = $data -> categoryId;
+    $quote -> author_id = $data -> author_id;
+    $quote -> category_id = $data -> category_id;
 
     // Check for  missing parameters
     if($quote -> id == null) {
@@ -27,11 +27,11 @@
         echo json_encode(
             array('message' => 'Missing Required Parameters'));
             exit();
-    } elseif ($quote -> authorId == null) {
+    } elseif ($quote -> author_id == null) {
         echo json_encode(
             array('message' => 'Missing Required Parameters'));
             exit();
-    } elseif ($quote -> categoryId == null) {
+    } elseif ($quote -> category_id == null) {
         echo json_encode(
             array('message' => 'Missing Required Parameters'));
             exit();
@@ -42,8 +42,8 @@
         echo json_encode(
             array('id' => $quote->id,
                   'quote' => $quote->quote,
-                  'authorId' => $quote->authorId,
-                  'categoryId' => $quote->categoryId 
+                  'author_id' => $quote->author_id,
+                  'category_id' => $quote->category_id 
             ));
     } else {
         echo json_encode(

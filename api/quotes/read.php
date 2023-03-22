@@ -18,12 +18,11 @@
 
     // Get Row Count
     $num = $result -> rowCount();
-
+    
     // Check if any categories
     if($num > 0) {
         // quote array
         $quote_arr = array();
-        $quote_arr['data'] = array();
 
         while($row = $result -> fetch(PDO::FETCH_ASSOC)) {
             extract($row);
@@ -36,7 +35,7 @@
             );
 
             // Push to 'data'
-            array_push($quote_arr['data'], $quote_item);
+            array_push($quote_arr, $quote_item);
         }
 
 

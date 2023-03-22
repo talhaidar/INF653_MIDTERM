@@ -60,19 +60,19 @@
 
        // Create Category
       public function create() {
+        
+            // Clean Data
+          $this -> category = htmlspecialchars(strip_tags($this -> category));
+        
             //Create Query
-          $query = 'INSERT INTO ' . $this -> table . '
-           SET
-              category = :category';
-    
+           $query = 'INSERT INTO ' . $this -> table . ' (category) 
+                VALUES(\'' . $this -> category . '\');';
+        
           //  Prepare Statement
           $stmt = $this -> conn -> prepare($query);
     
-           // Clean Data
-          $this -> category = htmlspecialchars(strip_tags($this -> category));
-    
           //  Bind Data
-          $stmt -> bindParam(':category', $this -> category);
+          //$stmt -> bindParam(':category', $this -> category);
     
            // Execute Query
           if($stmt -> execute()) {

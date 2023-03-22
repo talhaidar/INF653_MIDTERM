@@ -12,6 +12,7 @@
     // Get Raw Data
     $data = json_decode(file_get_contents("php://input"));
 
+
     $category -> category = $data -> category;
 
     if ($category -> category == null) {

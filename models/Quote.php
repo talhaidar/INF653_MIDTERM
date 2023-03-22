@@ -9,6 +9,8 @@
      public $quote;
      public $author;
      public $category;
+     public $category_id;
+     public $author_id;
 
      // Constructor with DB
      public function __construct($db) {
@@ -52,7 +54,7 @@
             WHERE
                 quotes.id = ?
             LIMIT 1 OFFSET 0';
-    
+      
         // Prepare Statement
         $stmt = $this -> conn -> prepare($query);
     
@@ -64,7 +66,8 @@
         $stmt -> execute();
     
         $row = $stmt -> fetch(PDO::FETCH_ASSOC);
-    
+          
+        
         // Set Properties
         $this -> id = $row['id'];
         $this -> quote = $row['quote'];
@@ -154,25 +157,27 @@
 
     // Create quote
     public function create() {
-        // Create Query
-        $query = 'INSERT INTO ' . $this -> table . '
-            SET
-                quote = :quote,
-                author_id = :author_id,
-                category_id = :category_id';
-        
-        // Prepare Statement
-        $stmt = $this -> conn -> prepare($query);
-        
+
         // Clean Data
         $this -> quote = htmlspecialchars(strip_tags($this -> quote));
         $this -> author_id = htmlspecialchars(strip_tags($this -> author_id));
         $this -> category_id = htmlspecialchars(strip_tags($this -> category_id));
+      
+        // Create Query
+        $query = 'INSERT INTO ' . $this -> table . ' (quote, author_id, category_id)
+            VALUES(\'' . $this -> quote . '\',
+                  \'' . $this -> author_id . '\', 
+                  \'' . $this -> category_id . '\');';
+      
         
-        // Bind Data
-        $stmt -> bindParam(':quote', $this -> quote);
-        $stmt -> bindParam(':author_id', $this -> author_id);
-        $stmt -> bindParam(':category_id', $this -> category_id);
+        // Prepare Statement
+        $stmt = $this -> conn -> prepare($query);
+        
+        
+        // // Bind Data
+        // $stmt -> bindParam(':quote', $this -> quote);
+        // $stmt -> bindParam(':author_id', $this -> author_id);
+        // $stmt -> bindParam(':category_id', $this -> category_id);
         
         // Execute Query
         if($stmt -> execute()) {

@@ -21,7 +21,7 @@
                 FROM
                     ' . $this -> table . '
                 ORDER BY
-                    id ASC';
+                    id DESC';
 
         // Prepare Statement
         $stmt = $this -> conn -> prepare($query);
@@ -60,19 +60,35 @@
 
     // Create Author
     public function create() {
+      
+        // Clean Data
+        $this -> author = htmlspecialchars(strip_tags($this -> author));
+      
         // Create Query
-        $query = 'INSERT INTO ' . $this -> table . '
-        SET
-           author = :author';
+        // BUG FIX: using double quotes is reserved for column names
+        // by putting a \ in front of the quotes you want to keep in the string
+        // it disualifies it from string interpolation and records it as a character
+        // the \ is used to disualify characters that would usually be used for other means
+        // in string interpolation
+        // therefore allowing it to be recorded in the query
+        $query = 'INSERT INTO ' . $this -> table . ' (author) 
+                  VALUES(\'' . $this -> author . '\');';
+        // this query now equals to 
+        // INSERT INTO author (author) VALUES('nolo');
+        // instead of 
+        // INSERT INTO author (author) VALUES(''nolo'');
+        // or
+        // INSERT INTO author (author) VALUES("nolo");
+      
 
         // Prepare Statement
         $stmt = $this -> conn -> prepare($query);
 
         // Clean Data
-        $this -> author = htmlspecialchars(strip_tags($this -> author));
+        // $this -> author = htmlspecialchars(strip_tags($this -> author));
 
         // Bind Data
-        $stmt -> bindParam(':author', $this -> author);
+        // $stmt -> bindParam(':author', $this -> author);
 
         // Execute Query
         if($stmt -> execute()) {
